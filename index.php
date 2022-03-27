@@ -1,2 +1,3 @@
 <?php
-echo "Eu sou o index.php";
+header("Location: cabecalho-menu.php");
+die();

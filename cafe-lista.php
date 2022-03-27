@@ -1,27 +1,38 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-</head>
-<body>
-    <table border="1">
-
 <?php
-$conexao = mysqli_connect("raspberrypi:3306", "root", "192345", "cafeimetrodb");
-$query = "SELECT id, nome, descricao, tipo_id FROM cafe ";
-$resultado = mysqli_query($conexao, $query);
-
-while ($cafe = mysqli_fetch_assoc($resultado))
-{
- ?>   
-    <tr>
-        <td><?=$cafe['nome']?></td>
-        <td><?=$cafe['descricao']?></td>
-        <td><?=$cafe['tipo_id']?></td>
-     </tr> 
-<?php
-}
+include 'cabecalho-menu.php';
+include 'conecta.php';
+include 'cafe-banco.php';
 ?>
+    <table class="table table-striped table-bordered">
+
+        <?php
+        $cafes = listaCafe($conexao);
+        foreach ($cafes as $cafe)
+        {
+        ?>   
+            <tr>
+                <td><?=$cafe['nome_cafe']?></td>
+                <td><?=$cafe['descricao']?></td>
+                <td><?=$cafe['nome_tipo']?></td>
+                <td>
+                    <form nome="form-altera" method="post" action="cafe-form-edita.php">
+                        <imput type="hidden" name="id" value="<?=$cafe['id']?>" />
+                        <button class="btn btn-primary" >Altera</button>
+                    </form>
+                </td>
+                <td>
+                    <form nome="form-remove" method="post" action="cafe-prepara-exclui.php">
+                        <imput type="hidden" name="id" value="<?=$cafe['id']?>" />
+                        <button class="btn btn-danger" >Remove</button>
+                    </form>
+                </td>
+            </tr> 
+        <?php
+        }
+        ?>
+
     </table>
-</body>
-</html>
+
+<?php
+include 'rodape.php';
+?>
