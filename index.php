@@ -1,3 +1,3 @@
 <?php
-header("Location: cabecalho-menu.php");
-die();
+include 'cabecalho-menu.php';
+include 'rodape.php';
