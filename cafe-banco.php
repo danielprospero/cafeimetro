@@ -1,7 +1,19 @@
 <?php
-function alteraCafe($conexao, $nome, $descricao, $tipo_id)
+function adicionaCafe($conexao, $nome, $descricao, $tipo_id)
 {
-    $query = "UPDATE cafe SET id = {$id}, nome = '{$nome}', descricao = '{$descricao}', tipo_id = {$tipo_id} WHERE id = {$id}";
+    $query = "INSERT INTO cafe (nome, descricao, tipo_id) VALUES ('$nome', '$descricao', $tipo_id) ";
+    return mysqli_query($conexao, $query);
+}
+
+function removeCafe($conexao, $id)
+{
+    $query = "DELETE FROM cafe WHERE id = '$id' ";
+    return mysqli_query($conexao, $query);
+}
+
+function alteraCafe($conexao, $id, $nome, $descricao, $tipo_id)
+{
+    $query = "UPDATE cafe SET id = '$id', nome = '$nome', descricao = '$descricao', tipo_id =  '$tipo_id' WHERE id = '$id' ";
     return mysqli_query($conexao, $query);
 }
 

@@ -4,22 +4,19 @@ include 'conecta.php';
 include 'cafe-banco.php';
 include 'tipo-banco.php';
 
-$id = $_POST['id'];
-$cafe = buscaCafePorID($conexao, $id);
 $tipos = listaTipo($conexao);
 ?>
 
-<h1>Altera Café</h1>
-<form action="cafe-edita.php" method="post">
-    <input type="hidden" name="id" value="<?=$cafe['id']?>" /> 
+<h1>Adiciona Café</h1>
+<form action="cafe-adiciona.php" method="post">
     <table class="table">
         <tr>
             <td>Nome</td>
-            <td><input class="form-control" type="text" name="nome" value="<?=$cafe['nome']?>" /></td>
+            <td><input class="form-control" type="text" name="nome" value="" /></td>
         </tr>
         <tr>
             <td>Descrição</td>
-            <td><textarea class="form-control" name="descricao" ><?=$cafe['descricao']?></textarea></td>
+            <td><textarea class="form-control" name="descricao" ></textarea></td>
         </tr>
 		<tr>
             <td>Tipo</td>
@@ -29,10 +26,9 @@ $tipos = listaTipo($conexao);
                     <?php
                     foreach ($tipos as $tipo)
                     {
-                        $opcaoSelecionada = ($cafe['tipo_id'] == $tipo['id']) ? "selected='selected'" : "";
                     ?>
 
-                        <option value="<?=$tipo['id']?>" <?=$opcaoSelecionada?> > <?=$tipo['nome']?> </option>
+                        <option value="<?=$tipo['id']?>" > <?=$tipo['nome']?> </option>
 
                     <?php
                     }
@@ -42,7 +38,7 @@ $tipos = listaTipo($conexao);
             </td>
         </tr>
 		<tr>
-            <td><button class="btn btn-primary" type="submit">Salvar</button></td>
+            <td><button class="btn btn-primary" type="submit">Adicionar</button></td>
         </tr>
     </table>
 </form>
