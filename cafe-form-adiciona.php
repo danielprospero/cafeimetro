@@ -1,7 +1,6 @@
 <?php
 include 'cabecalho-menu.php';
 include 'conecta.php';
-include 'cafe-banco.php';
 include 'tipo-banco.php';
 
 $tipos = listaTipo($conexao);
