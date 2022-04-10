@@ -17,10 +17,10 @@ function removeCafe($conexao, $id)
 
 function alteraCafe($conexao, $id, $nome, $descricao, $tipo_id)
 {
-    $query = "UPDATE cafe SET id = ?, nome = ?, descricao = ?, tipo_id = ? WHERE id = ? ";
-    $instrucao = $conexao->prepare($query);
-    $instrucao->bind_param('issii', $nome, $descricao, $tipo_id);
-    return $instrucao->execute();
+	$query = "update cafe set nome = ?, descricao = ?, tipo_id = ? where id = ? ";
+	$instrucao = $conexao->prepare($query);
+	$instrucao->bind_param('ssii', $nome, $descricao, $tipo_id, $id);
+	return $instrucao->execute();
 }
 
 function listaCafe($conexao)

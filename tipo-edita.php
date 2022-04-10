@@ -1,14 +1,13 @@
 <?php
 include 'cabecalho-menu.php';
 include 'conecta.php';
-include 'cafe-banco.php';
+include 'tipo-banco.php';
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];
-$descricao = $_POST['descricao'];
-$tipo_id = $_POST['tipo_id'];
 
-$alterou = alteraCafe($conexao, $id, $nome, $descricao, $tipo_id);
+
+$alterou = alteraTipo($conexao, $id, $nome, $descricao, $tipo_id);
 if ($alterou)
 {
 ?>
@@ -19,7 +18,7 @@ else {
 ?>
 	<p class="text-danger">Erro ao tentar alterado o registro <?=$nome?>.</p>
 <?php
-printf("Errormessage: %s\n", mysqli_errno($query));
+
 }
 include 'rodape.php';
 ?>
