@@ -21,3 +21,19 @@ function listaConsumo($conexao)
     return $consumos;
 
 }
+
+function removeConsumo($conexao, $id)
+{
+    $query = "delete from consumo where id = ? ";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i', $id);
+    return $instrucao->execute();
+}
+
+function adicionaConsumo($conexao, $data, $hora, $cafe_id, $qtd, $preco, $dia_semana)
+{
+    $query = "insert into consumo (data, hora, cafe_id, qtd, preco, dia_semana) VALUES (?, ?, ?, ?, ?, ?) ";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('ssiids', $data, $hora, $cafe_id, $qtd, $preco, $dia_semana);
+    return $instrucao->execute();
+}

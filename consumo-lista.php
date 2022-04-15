@@ -3,6 +3,10 @@ include 'cabecalho-menu.php';
 include 'conecta.php';
 include 'consumo-banco.php';
 ?>
+<h1>O que eu já consumir...</h1>
+
+<button class="btn btn-primary"onclick="window.location.href='consumo-form-adiciona.php'">Mais café</button></button> <br> <br>
+
 	<table class="table table-striped table-bordered">
 
 		<?php
@@ -18,8 +22,8 @@ include 'consumo-banco.php';
 				<td><?=$consumo['qtd']?>ml</td>
 				<td>R$ <?=number_format($consumo['preco'],2,',','.')?></td>
 				<td>
-					<form name="form-remove" method="post" action="consumo-exclui.pho">
-						<input type="hidden" name="id" value="<?=$consumo['id']?>" />
+					<form name="form-remove" method="post" action="consumo-exclui.php">
+						<input type="hidden" name="id" value="<?=$consumo['consumo_id']?>" />
 						<button class="btn btn-danger">remove</button>
 					</form>
 				</td>

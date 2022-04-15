@@ -27,7 +27,7 @@ function listaCafe($conexao)
 {
     $cafes  = array();
 
-    $query = "SELECT c.id, c.nome as nome_cafe, c.descricao, t.nome as nome_tipo FROM cafe c ";
+    $query = "select c.id, c.nome as nome_cafe, c.descricao, t.nome as nome_tipo from cafe c ";
     $query .= " inner join tipo t on (c.tipo_id = t.id)";
     $instrucao = $conexao->prepare($query);
     $instrucao->execute();
