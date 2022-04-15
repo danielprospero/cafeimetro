@@ -19,9 +19,14 @@ include 'tipo-banco.php';
 					</form>
 				</td>
 				<td>
+					<?php
+						$tem_vinculo = temVinculoComCafe($conexao, $tipo['id']);
+						$status_botao = ($tem_vinculo == 0) ? "" : "disabled";
+					?>
+
 					<form name="form-remove" method="post" action="tipo-prepara-exclui.php">
 						<input type="hidden" name="id" value="<?=$tipo['id']?>" />
-						<button class="btn btn-danger">Remove</button>
+						<button class="btn btn-danger" <?=$status_botao?> >Remove</button>
 					</form>
 				</td>
 			</tr>

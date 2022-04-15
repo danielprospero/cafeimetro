@@ -34,3 +34,40 @@ function alteratipo($conexao, $id, $nome)
 	return $instrucao->execute();
 }
 
+function temTipoPorNome($conexao, $nome)
+{
+	$query = "select count(id) as qtd from tipo where nome = ?;";
+	$instrucao = $conexao->prepare($query);
+	$instrucao->bind_param('s', $nome);
+	$instrucao->execute();
+	$resultado = $instrucao->get_result();
+	$count = $resultado->fetch_assoc();
+	return $count['qtd'];		
+}
+
+function temVinculoComCafe($conexao, $id)
+{
+	$query = "select count(id) as qtd from cafe where tipo_id = ?;";
+	$instrucao = $conexao->prepare($query);
+	$instrucao->bind_param('i', $id);
+	$instrucao->execute();
+	$resultado = $instrucao->get_result();
+	$count = $resultado->fetch_assoc();
+	return $count['qtd'];		
+}
+
+function removeTipo($conexao, $id)
+{
+    $query = "delete from tipo where id = ? ";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i', $id);
+    return $instrucao->execute();
+}
+
+function adicionaTipo($conexao, $nome)
+{
+    $query = "insert into tipo (nome) VALUES (?) ";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('s', $nome);
+    return $instrucao->execute();
+}
