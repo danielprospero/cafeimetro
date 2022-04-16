@@ -7,17 +7,19 @@ $nome = $_POST['nome'];
 $descricao = $_POST['descricao'];
 $tipo_id = $_POST['tipo_id'];
 
-$adicinou = adicionaCafe($conexao, $nome, $descricao, $tipo_id);
-if ($adicinou)
+$adicionou = adicionaCafe($conexao, $nome, $descricao, $tipo_id);
+if ($adicionou)
 {
 ?>
-	<p class="text-sucess"><?=$nome?> inserido com sucesso.</p>
+	<p class="text-sucess">Registro <?=$nome?> inserido com sucesso.</p>
 <?php
 }
 else {
 ?>
-	<p class="text-danger">Erro ao tentar inserir o <?=$nome?>.</p>
+	<p class="text-danger">Erro ao tentar inserir o registro <?=$nome?>.</p>
 <?php
 }
 include 'rodape.php';
 ?>
+
+

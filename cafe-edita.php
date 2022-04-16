@@ -19,7 +19,6 @@ else {
 ?>
 	<p class="text-danger">Erro ao tentar alterado o registro <?=$nome?>.</p>
 <?php
-printf("Errormessage: %s\n", mysqli_errno($query));
 }
 include 'rodape.php';
 ?>
