@@ -4,59 +4,39 @@ date_default_timezone_set('Brazil/East');
 include 'conecta.php';
 include 'consumo-banco.php';
 
-$valor_total = 0;
-$ml_total = 0;
-$cafe_total = 0;
-$data_hoje = date('d/m/Y H:m:s');
+include 'report-cabecalho.php';
+include 'report-variaveis.php';
+include 'report-listagem.php';
+include 'report-totalizadores.php';
+include 'report-rodape.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Cafeímetro</title>
-		<meta charset="utf-8">
-		<link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
-		<link href="css/cafeimetro.css" rel="stylesheet" />
-	</head>
-	<body>
+<script src="js/funcoes/report.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
 
-		<button type="button" name="btn_criapdf" class="btn btn-secondary" onclick="geraPDF()">Gera PDF</button>
+	function drawChart() 
+	{
+	    var data = google.visualization.arrayToDataTable([
+	    ['Dia da Semana', 'Qtd Café'],
+	    <?php include 'report-imprime-dados-chart.php'; ?>
+		]);
 
-		<div class="container" id="div-report">
-				<div class="principal">
-				<h3>Relatório de consumo em <?=$data_hoje?></h3>
-				<table class="table">
+	    var options = {
+			title: 'Cafés bebidos por dia da semana',
+			is3D: true,
+		};
 
-					<?php
-					$consumos = listaConsumo($conexao);	
-					foreach ($consumos as $consumo)
-					{
-						$valor_total += $consumo['preco'];
-						$ml_total += $consumo['qtd'];
-						$cafe_total++;
-					?>
-						<tr>
-							<td><?=$consumo['data_consumo']?></td>
-							<td><?=$consumo['hora_consumo']?></td>
-							<td><?=$consumo['dia_semana']?></td>
-							<td><?=$consumo['cafe_nome']?></td>
-							<td><?=$consumo['qtd']?>ml</td>
-							<td>R$ <?=number_format($consumo['preco'],2,',','.')?></td>
-						</tr>
-					<?php
-					}
-					?>	
-				</table>
-				<br>			
-				<h3>Totalizador</h3>
-				<table class="table table-striped table-bordered">
+		var chart_area = document.getElementById('piechart');
+		var chart = new google.visualization.PieChart(chart_area);
 
-					<tr style="text-align: center">
-						<td>Cafés:</td><td><?=$cafe_total?></td>
-						<td>Qtd ml</td><td><?=$ml_total?></td>
-						<td>R$</td><td><?=number_format($valor_total,2,',','.')?></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</body>
+		google.visualization.events.addListener(chart, 'ready', function()
+		{
+			chart_area.innerHTML = '<img src="' + chart.getImageURI() + '">';
+		});
+
+		chart.draw(data, options);
+	}
+</script>

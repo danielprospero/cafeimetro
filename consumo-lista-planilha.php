@@ -34,7 +34,6 @@ header("content-Type: application/xls");
 header("content-Disposition:attachment; filename=" . $o_arquivo);
 header("content-Discription: Dados gerados via PHP.");
 
-echo $html;
 
 
 

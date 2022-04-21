@@ -26,3 +26,9 @@ create table consumo (
     cafe_id integer,
     constraint foreign key (cafe_id) references cafe (id)
 ) engine=InnoDB;
+
+create table usuario (
+	id integer AUTO_INCREMENT primary key,
+	email varchar(30) not null,
+	senha varchar(120) not null
+) engine=INNODB;

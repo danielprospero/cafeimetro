@@ -9,7 +9,6 @@ include 'consumo-banco.php';
 <button class="btn btn-secondary" onclick="window.open('consumo-lista-planilha.php', 'blank')">Exportar para planilha</button></button>
 <button class="btn btn-secondary" onclick="window.open('consumo-lista-report.php', 'blank')">Relatório</button></button> <br> <br>
 
-
 	<table class="table table-striped table-bordered">
 
 		<?php

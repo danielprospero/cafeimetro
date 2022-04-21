@@ -1,4 +1,3 @@
 <?php
-include 'cabecalho-menu.php';
-include 'rodape.php';
-
+header("Location: login-form.php");
+die();
