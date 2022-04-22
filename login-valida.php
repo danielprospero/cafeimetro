@@ -1,4 +1,5 @@
 <?php
+include 'usuario.php';
 include 'conecta.php';
 include 'usuario-banco.php';
 
@@ -13,6 +14,7 @@ $usuario = validaUsuario($conexao, $email, $senha);
 
 if ($usuario !== null)
 {
+    $_SESSION["USUARIO"]["EMAIL"] = $email;
     $destino = "Location: plataforma.php";
 }
 
